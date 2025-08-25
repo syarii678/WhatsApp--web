@@ -44,54 +44,61 @@ p {
     line-height: 1.6;
 }
 
-.status {
-    background: rgba(255, 255, 255, 0.15);
+.phone-form {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-with-prefix {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.prefix {
+    padding: 0 15px;
+    background: #e0e0e0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-with-prefix input {
+    flex: 1;
+    border: none;
     padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: transparent;
+    font-size: 16px;
+    outline: none;
 }
 
-.status i {
-    margin-right: 10px;
+.input-group small {
+    display: block;
+    margin-top: 8px;
+    opacity: 0.8;
+    font-size: 12px;
 }
 
-.status.connected {
-    background: rgba(72, 195, 96, 0.3);
-}
-
-.status.disconnected {
-    background: rgba(235, 87, 87, 0.3);
-}
-
-.qrcode-container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#qrcode {
-    width: 200px;
-    height: 200px;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-button {
+.submit-btn {
     background: #fff;
     color: #128C7E;
     border: none;
-    padding: 12px 25px;
+    padding: 15px 25px;
     border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
@@ -99,20 +106,17 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    font-size: 16px;
 }
 
-button i {
+.submit-btn i {
     margin-right: 8px;
 }
 
-button:hover {
+.submit-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-button.secondary {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
 }
 
 .info-box {
@@ -142,20 +146,8 @@ button.secondary {
     margin-bottom: 8px;
 }
 
-.hidden {
-    display: none;
-}
-
 @media (max-width: 600px) {
     .container {
         padding: 20px;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    button {
-        width: 100%;
     }
 }
