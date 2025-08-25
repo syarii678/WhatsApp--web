@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Bot Pairing</title>
+    <title>WhatsApp Bot - Masukkan Nomor</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -13,41 +13,34 @@
             <i class="fab fa-whatsapp"></i>
         </div>
         
-        <h1>WhatsApp Bot Pairing</h1>
-        <p>Scan kode QR berikut dengan aplikasi WhatsApp Anda untuk menghubungkan bot</p>
+        <h1>WhatsApp Bot Setup</h1>
+        <p>Masukkan nomor WhatsApp Anda untuk memulai proses pairing</p>
         
-        <div class="status" id="status">
-            <i class="fas fa-sync-alt fa-spin"></i>
-            <span>Menunggu koneksi...</span>
-        </div>
-        
-        <div class="qrcode-container">
-            <div id="qrcode"></div>
-        </div>
-        
-        <div class="action-buttons">
-            <button id="refreshBtn">
-                <i class="fas fa-sync-alt"></i> Refresh QR
+        <form id="phoneForm" class="phone-form">
+            <div class="input-group">
+                <label for="phoneNumber">Nomor WhatsApp (dengan kode negara):</label>
+                <div class="input-with-prefix">
+                    <span class="prefix">+</span>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="62xxxxxxxxxx" required pattern="[0-9]{8,15}">
+                </div>
+                <small>Contoh: 628123456789 (tanpa spasi atau tanda baca)</small>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-arrow-right"></i> Lanjut ke Pairing
             </button>
-            <button class="secondary" id="helpBtn">
-                <i class="fas fa-question-circle"></i> Bantuan
-            </button>
-        </div>
+        </form>
         
         <div class="info-box">
-            <h3><i class="fas fa-info-circle"></i> Petunjuk Penggunaan</h3>
+            <h3><i class="fas fa-info-circle"></i> Informasi Penting</h3>
             <ul>
-                <li>Buka WhatsApp di ponsel Anda</li>
-                <li>Ketuk menu titik tiga (⋮) atau pengaturan</li>
-                <li>Pilih "Perangkat Tertaut" atau "Linked Devices"</li>
-                <li>Ketuk "Link A Device" atau "Tautkan Perangkat"</li>
-                <li>Scan kode QR yang ditampilkan di atas</li>
+                <li>Pastikan nomor yang dimasukkan aktif dan dapat menerima SMS</li>
+                <li>Proses pairing membutuhkan koneksi internet yang stabil</li>
+                <li>Data nomor hanya digunakan untuk keperluan autentikasi</li>
             </ul>
         </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
