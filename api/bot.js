@@ -3,6 +3,7 @@ const http = require('http');
 const socketIO = require('socket.io');
 const cors = require('cors');
 const WhatsAppClient = require('../lib/whatsapp');
+const authRoutes = require('./auth');
 
 const app = express();
 const server = http.createServer(app);
@@ -15,6 +16,7 @@ const io = socketIO(server, {
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/auth', authRoutes);
 
 // Initialize WhatsApp client
 const whatsappClient = new WhatsAppClient();
@@ -23,6 +25,13 @@ whatsappClient.initialize(io);
 // Socket.io connection handling
 io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
+    
+    // Handle phone registration
+    socket.on('register-phone', (data) => {
+        console.log('Phone registered via socket:', data.phone);
+        // You can store this information or link it to the socket
+        socket.phoneNumber = data.phone;
+    });
     
     // Send current QR code if available
     const currentQr = whatsappClient.getQrCode();
