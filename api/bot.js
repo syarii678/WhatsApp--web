@@ -24,6 +24,17 @@ whatsappClient.initialize(io);
 io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
     
+    // Send current QR code if available
+    const currentQr = whatsappClient.getQrCode();
+    if (currentQr) {
+        qrcode.toDataURL(currentQr, (err, url) => {
+            if (!err) {
+                socket.emit('qr', url);
+                socket.emit('status', { state: 'waiting', message: 'Scan QR code untuk menghubungkan' });
+            }
+        });
+    }
+    
     socket.on('disconnect', () => {
         console.log('User disconnected:', socket.id);
     });
@@ -35,7 +46,9 @@ io.on('connection', (socket) => {
             socket.emit('status', { state: 'waiting', message: 'Meminta QR code baru...' });
             // Force a new QR code by reinitializing
             whatsappClient.getClient().destroy();
-            whatsappClient.getClient().initialize();
+            setTimeout(() => {
+                whatsappClient.getClient().initialize();
+            }, 1000);
         }
     });
 });
@@ -46,6 +59,21 @@ app.get('/api/health', (req, res) => {
         status: 'OK', 
         whatsapp: whatsappClient.isReady() ? 'connected' : 'disconnected' 
     });
+});
+
+// Get QR code endpoint
+app.get('/api/qrcode', async (req, res) => {
+    try {
+        const qrCode = whatsappClient.getQrCode();
+        if (qrCode) {
+            const qrImage = await qrcode.toDataURL(qrCode);
+            res.json({ qrCode: qrImage });
+        } else {
+            res.status(404).json({ error: 'QR code not available' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to generate QR code' });
+    }
 });
 
 // Handle messages
